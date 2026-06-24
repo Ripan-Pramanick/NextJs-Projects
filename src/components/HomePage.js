@@ -99,10 +99,7 @@ const GradientCircle = () => {
 
     return (
         <div
-            className="absolute top-1/2 left-1/2 w-[1000px] h-[1000px] rounded-full 
-                      bg-gradient-to-br from-cyan-500/60 via-transparent to-fuchsia-500/60 
-                      transform -translate-x-1/2 -translate-y-1/2 
-                      z-0 pointer-events-none"
+            className="absolute top-1/2 left-1/2 w-[1000px] h-[1000px] rounded-full bg-gradient-to-br from-cyan-500/60 via-transparent to-fuchsia-500/60 transform -translate-x-1/2 -translate-y-1/2 z-0 pointer-events-none"
             style={blurStyle}
         />
     );

@@ -14,9 +14,9 @@ export const metadata = {
   title: 'Minervasutra: The All-in-One AI Powered HR Management Software',
   description: 'Automate your entire workforce with Minervasutra. Our AI HR platform streamlines hiring, payroll, and employee management to scale your business faster.',
   icons: {
-    icon: '/logo1-removebg-preview.png',
-    shortcut: '/logo1-removebg-preview.png',
-    apple: '/logo1-removebg-preview.png'
+    icon: '/icon.ico',
+    shortcut: '/icon.ico',
+    apple: '/icon.ico'
   }
 };
 
