@@ -56,7 +56,7 @@ export default function ContactComponent() {
             if (response.ok) {
                 setStatus('success');
                 // Reset full form including the new inquiryType field
-                setFormData({ 
+                setFormData({
                     fullName: '', email: '', company: '',
                     companySize: 'Select Size', inquiryType: 'General Inquiry', message: ''
                 });
@@ -75,33 +75,33 @@ export default function ContactComponent() {
 
     // Data from the provided design image with clickable links
     const contactInfo = [
-        { 
-            icon: Mail, 
-            title: 'Email', 
-            detail: 'contact@minervasutra.com', 
+        {
+            icon: Mail,
+            title: 'Email',
+            detail: 'contact@minervasutra.com',
             subtext: 'Drop us a line anytime',
-            href: 'mailto:contact@minervasutra.com' 
+            href: 'mailto:contact@minervasutra.com'
         },
-        { 
-            icon: Phone, 
-            title: 'Phone', 
-            detail: '+91 6290735934', 
+        {
+            icon: Phone,
+            title: 'Phone',
+            detail: '+91 6290735934',
             subtext: 'Mon-Fri, 9am-6pm EST',
-            href: 'tel:+916290735934' 
+            href: 'tel:+916290735934'
         },
-        { 
-            icon: MapPin, 
-            title: 'Office', 
-            detail: 'Park Circus, Kolkata, West Bengal', 
+        {
+            icon: MapPin,
+            title: 'Office',
+            detail: 'Park Circus, Kolkata, West Bengal',
             subtext: 'West Bengal, PIN-700017',
-            href: null 
+            href: null
         },
-        { 
-            icon: Clock, 
-            title: 'Hours', 
-            detail: '9:00 AM - 6:00 PM', 
+        {
+            icon: Clock,
+            title: 'Hours',
+            detail: '9:00 AM - 6:00 PM',
             subtext: 'Pacific Standard Time',
-            href: null 
+            href: null
         },
     ];
 
@@ -130,8 +130,16 @@ export default function ContactComponent() {
                         <h2 className="text-2xl font-bold text-gray-900 mb-6">Send us a message</h2>
 
                         {status === 'success' ? (
-                            <div className="p-4 text-green-700 bg-green-100 rounded-lg text-center font-semibold">
-                                Message Sent Successfully! We will respond within 24 hours.
+                            <div className="flex items-start gap-4 p-5 bg-white border border-gray-100 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.08)]">
+                                <div className="flex-shrink-0 flex items-center justify-center w-10 h-10 rounded-full bg-emerald-50 text-emerald-600">
+                                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                </div>
+                                <div className="text-left">
+                                    <h3 className="text-base font-semibold text-gray-900">Message Sent Successfully!</h3>
+                                    <p className="text-sm text-gray-500 mt-1">We will respond within 24 hours.</p>
+                                </div>
                             </div>
                         ) : (
                             <form onSubmit={handleSubmit} className="space-y-4">
@@ -224,9 +232,8 @@ export default function ContactComponent() {
                                 <button
                                     type="submit"
                                     disabled={isSubmitting}
-                                    className={`w-full py-3 text-lg font-semibold rounded-lg text-white transition duration-200 cursor-pointer ${
-                                        isSubmitting ? 'bg-fuchsia-400 cursor-not-allowed' : 'bg-fuchsia-600 hover:bg-fuchsia-700 shadow-lg'
-                                    }`}
+                                    className={`w-full py-3 text-lg font-semibold rounded-lg text-white transition duration-200 cursor-pointer ${isSubmitting ? 'bg-fuchsia-400 cursor-not-allowed' : 'bg-fuchsia-600 hover:bg-fuchsia-700 shadow-lg'
+                                        }`}
                                 >
                                     {isSubmitting ? 'Sending Message...' : 'Send Message'}
                                 </button>
@@ -253,10 +260,10 @@ export default function ContactComponent() {
                                         <item.icon className="w-5 h-5 text-fuchsia-600 flex-shrink-0 mt-1" />
                                         <div>
                                             <p className="text-sm font-semibold text-gray-900">{item.title}</p>
-                                            
+
                                             {item.href ? (
-                                                <a 
-                                                    href={item.href} 
+                                                <a
+                                                    href={item.href}
                                                     className="text-base text-fuchsia-600 hover:text-fuchsia-800 hover:underline transition-colors duration-200"
                                                 >
                                                     {item.detail}
@@ -264,7 +271,7 @@ export default function ContactComponent() {
                                             ) : (
                                                 <p className="text-base text-fuchsia-600">{item.detail}</p>
                                             )}
-                                            
+
                                             <p className="text-xs text-gray-500 mt-1">{item.subtext}</p>
                                         </div>
                                     </div>
@@ -283,7 +290,7 @@ export default function ContactComponent() {
                                     referrerPolicy="no-referrer-when-downgrade"
                                 ></iframe>
                             </div>
-                        </div> 
+                        </div>
                     </div>
 
                 </div>
