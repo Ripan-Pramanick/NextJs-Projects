@@ -1,4 +1,4 @@
-// src/components/HomePage.js
+"use client";
 
 import { ArrowRight, Play, CheckCircle, Users, Clock, Shield, BarChart, TrendingUp, Heart, User } from 'lucide-react';
 import Image from 'next/image';
@@ -48,7 +48,6 @@ const HeroMetricsCard = () => (
     </div>
 );
 
-
 const MetricCard = ({ icon: Icon, iconColor, title, value, label, valueColor = 'text-gray-900' }) => (
     <div className="p-4 bg-white rounded-xl shadow-md border border-gray-100 flex flex-col justify-between h-full">
         <div className="flex justify-between items-start mb-4">
@@ -93,7 +92,6 @@ const HeroGradient = () => {
     );
 };
 
-
 const GradientCircle = () => {
     const blurStyle = {
         filter: 'blur(100px)',
@@ -102,16 +100,15 @@ const GradientCircle = () => {
     return (
         <div
             className="absolute top-1/2 left-1/2 w-[1000px] h-[1000px] rounded-full 
-                     bg-gradient-to-br from-cyan-500/60 via-transparent to-fuchsia-500/60 
-                     transform -translate-x-1/2 -translate-y-1/2 
-                     z-0 pointer-events-none"
+                      bg-gradient-to-br from-cyan-500/60 via-transparent to-fuchsia-500/60 
+                      transform -translate-x-1/2 -translate-y-1/2 
+                      z-0 pointer-events-none"
             style={blurStyle}
         />
     );
 };
 
-
-// --- SECTIONS ---
+// --- PAGE SECTIONS ---
 
 const HeroContainer = ({ children }) => {
     const gridStyle = {
@@ -135,7 +132,6 @@ const HeroContainer = ({ children }) => {
     );
 };
 
-
 const TrustBarSection = () => (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 border-b border-gray-100 mb-12 relative z-10">
         <p className="text-center text-sm font-semibold text-gray-500 uppercase tracking-widest mb-6">
@@ -150,7 +146,6 @@ const TrustBarSection = () => (
         </div>
     </div>
 );
-
 
 const KeyBenefitsSection = () => (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 relative z-10">
@@ -198,11 +193,9 @@ const KeyBenefitsSection = () => (
     </div>
 );
 
-
 const WorkflowFeaturesSection = () => (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-
             <div className="space-y-8">
                 <h2 className="text-5xl font-extrabold leading-tight text-gray-900">
                     Everything You Need to Manage <br />
@@ -288,11 +281,9 @@ const WorkflowFeaturesSection = () => (
     </div>
 );
 
-// 5. CTA Banner Section (Aggressive bottom margin: mb-40)
 const CTABannerSection = () => (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-20 mb-0 relative z-10">
-        <div className="p-12 md:p-16 rounded-3xl text-center text-white 
-                      bg-gradient-to-r from-fuchsia-600 to-cyan-500 shadow-xl">
+        <div className="p-12 md:p-16 rounded-3xl text-center text-white bg-gradient-to-r from-fuchsia-600 to-cyan-500 shadow-xl">
             <h2 className="text-4xl font-extrabold mb-4">
                 Ready to Transform Your HR?
             </h2>
@@ -312,19 +303,20 @@ const CTABannerSection = () => (
     </div>
 );
 
-
 // --- MAIN COMPONENT ---
+
 export default function HomePageComponent() {
     const router = useRouter();
+    
     return (
         <div className="min-h-screen">
-
-            {/* 1. HERO SECTION WRAPPER */}
+            
+            {/* Hero Section */}
             <HeroContainer>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-32">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 
-                        {/* TEXT AND CTAS */}
+                        {/* Text and CTAs */}
                         <div className="relative z-10">
                             <p className="flex items-center text-sm font-semibold text-purple-600 mb-4">
                                 <CheckCircle className="w-4 h-4 mr-1 text-purple-500" />
@@ -343,29 +335,20 @@ export default function HomePageComponent() {
                                AI-powered HR platform that handles your entire employee lifecycle from hiring to payroll to performance. Manage everything in one intelligent system built for teams of 10 to 500+.
                             </p>
 
-                            {/* CTAs */}
                             <div className="mt-10 flex flex-col sm:flex-row gap-4">
                                 <button
-                                onClick={() => router.push('/contact?type=demo#contact-form')}
-                                className="flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-fuchsia-600 hover:bg-fuchsia-700 shadow-lg transition duration-150 ease-in-out">
+                                    onClick={() => router.push('/contact?type=demo#contact-form')}
+                                    className="flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-fuchsia-600 hover:bg-fuchsia-700 shadow-lg transition duration-150 ease-in-out">
                                     Start Free Trial →
                                 </button>
                                 <button
-
-                                    className="flex items-center justify-center px-8 py-3 
-                                                border border-gray-300 text-base font-medium rounded-lg 
-                                                text-gray-700 bg-white 
-                                                hover:bg-gray-50 
-                                                hover:shadow-lg 
-                                                transition duration-300 
-                                                ease-in-out"
-                                >
+                                    className="flex items-center justify-center px-8 py-3 border border-gray-300 text-base font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 hover:shadow-lg transition duration-300 ease-in-out">
                                     <Play className="w-4 h-4 mr-2 text-indigo-600" />
                                     Watch Demo
                                 </button>
                             </div>
 
-                            {/* Reviews */}
+                            {/* Social Proof */}
                             <div className="mt-8 flex items-center space-x-4">
                                 <div className="flex -space-x-2">
                                     <span className="w-8 h-8 rounded-full flex items-center justify-center bg-blue-100 text-blue-600 font-bold text-sm border-2 border-white">A</span>
@@ -379,41 +362,29 @@ export default function HomePageComponent() {
                             </div>
                         </div>
 
-                        {/* HERO METRICS CARD */}
+                        {/* Hero Illustration */}
                         {/* <HeroMetricsCard /> */}
-                       <Image
-                        src="/home.png" 
-                        alt="Chat Icon" 
-                        width={700}
-                        height={700}/>
+                        <Image
+                            src="/home.png" 
+                            alt="Chat Icon" 
+                            width={700}
+                            height={700}
+                        />
                     </div>
                 </div>
             </HeroContainer>
 
-            {/* Fade Divider for Hero transition */}
+            {/* Transition Divider */}
             <GradientFadeDivider />
 
-            {/* White wrapper starts here and houses the rest of the sections. */}
+            {/* Main Content Wrapper */}
             <div className="bg-white relative">
-
-                {/* 2. TRUST BAR SECTION (Logos) */}
                 <TrustBarSection />
-
-                {/* 3. KEY BENEFITS SECTION */}
                 <KeyBenefitsSection />
-
-                {/* Gradient Circle for the body content (centered, absolute) */}
                 <GradientCircle />
-
-                {/* 4. WORKFLOW FEATURES SECTION */}
                 <WorkflowFeaturesSection />
-                    
-
-                {/* 5. CTA BANNER SECTION - This is the last section before the external footer */}
                 <CTABannerSection />
             </div>
-
-            {/* The Footer component is expected to be rendered by your main layout.js file. */}
 
         </div>
     );
