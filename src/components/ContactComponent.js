@@ -1,33 +1,47 @@
 // src/components/ContactComponent.js
 'use client';
 
-import React, { useState, useEffect } from 'react'; // <-- 1. Imported useEffect
+import React, { useState, useEffect } from 'react';
 import { Mail, Phone, MapPin, Clock, Heart, ArrowRight } from 'lucide-react';
 
 export default function ContactComponent() {
+    // 1. Updated state to include planType
     const [formData, setFormData] = useState({
         fullName: '',
         email: '',
         company: '',
         companySize: 'Select Size',
-        inquiryType: 'General Inquiry', // <-- 2. Added default state for Inquiry Type
+        inquiryType: 'General Inquiry',
+        planType: '', // Added new state for conditional dropdown
         message: '',
     });
     const [status, setStatus] = useState(''); // 'loading', 'success', 'error'
 
-    // 3. Automatically detect URL parameter and update dropdown on mount
+    // Automatically detect URL parameter and update dropdown on mount
+
     useEffect(() => {
         if (typeof window !== 'undefined') {
             const params = new URLSearchParams(window.location.search);
             const typeParam = params.get('type');
+            const planParam = params.get('plan'); // <-- NEW: Extract the plan parameter
 
-            if (typeParam === 'demo') {
-                setFormData((prev) => ({ ...prev, inquiryType: 'Request Demo' }));
-            } else if (typeParam === 'pricing') {
-                setFormData((prev) => ({ ...prev, inquiryType: 'Pricing Information' }));
-            } else if (typeParam === 'careers') {
-                setFormData((prev) => ({ ...prev, inquiryType: 'Careers' }));
-            }
+            setFormData((prev) => {
+                const newData = { ...prev };
+
+                // Set Inquiry Type
+                if (typeParam === 'demo') newData.inquiryType = 'Request Demo';
+                else if (typeParam === 'pricing') newData.inquiryType = 'Start Free Trial';
+                else if (typeParam === 'careers') newData.inquiryType = 'Careers';
+                else if (typeParam === 'start_free_trial') newData.inquiryType = 'Start Free Trial';
+                else if (typeParam === 'watch_demo') newData.inquiryType = 'Watch Demo';
+
+                // Set Plan Type if it exists in the URL
+                if (planParam) {
+                    newData.planType = planParam;
+                }
+
+                return newData;
+            });
         }
     }, []);
 
@@ -46,6 +60,13 @@ export default function ContactComponent() {
             return;
         }
 
+        // Additional validation: Ensure planType is selected if inquiry is Free Trial
+        if (formData.inquiryType === 'Start Free Trial' && !formData.planType) {
+            setStatus('error');
+            alert('Please select a plan to start your free trial.');
+            return;
+        }
+
         try {
             const response = await fetch('/api/contact', {
                 method: 'POST',
@@ -55,10 +76,11 @@ export default function ContactComponent() {
 
             if (response.ok) {
                 setStatus('success');
-                // Reset full form including the new inquiryType field
+                // Reset full form including the new fields
                 setFormData({
                     fullName: '', email: '', company: '',
-                    companySize: 'Select Size', inquiryType: 'General Inquiry', message: ''
+                    companySize: 'Select Size', inquiryType: 'General Inquiry',
+                    planType: '', message: ''
                 });
             } else {
                 const errorData = await response.json();
@@ -199,7 +221,7 @@ export default function ContactComponent() {
                                     </label>
                                 </div>
 
-                                {/* --- 4. New Inquiry Type Dropdown --- */}
+                                {/* --- Inquiry Type Dropdown --- */}
                                 <label className="block">
                                     <span className="text-gray-700 font-medium">Inquiry Type</span>
                                     <select
@@ -210,11 +232,31 @@ export default function ContactComponent() {
                                     >
                                         <option value="General Inquiry">General Inquiry</option>
                                         <option value="Request Demo">Request Demo</option>
-                                        <option value="Pricing Information">Pricing Information</option>
-                                        <option value="Partnership">Partnership</option>
+                                        {/* <option value="Start Free Trial">Start Free Trial</option> */}
+                                        <option value="Start Free Trial">Start Free Trial</option>
+                                        <option value="Watch Demo">Watch Demo</option>
                                         <option value="Careers">Careers</option>
                                     </select>
                                 </label>
+
+                                {/* --- Conditional Plan Dropdown --- */}
+                                {formData.inquiryType === 'Start Free Trial' && (
+                                    <label className="block mt-4 transition-all duration-300 ease-in-out">
+                                        <span className="text-gray-700 font-medium">Select Plan <span className="text-red-500">*</span></span>
+                                        <select
+                                            name="planType"
+                                            value={formData.planType}
+                                            onChange={handleChange}
+                                            className="mt-1 block w-full rounded-md border-fuchsia-300 shadow-sm p-3 focus:ring-fuchsia-500 focus:border-fuchsia-500 text-gray-900 bg-fuchsia-50"
+                                            required
+                                        >
+                                            <option value="" disabled>Choose a plan...</option>
+                                            <option value="Basic Plan (Free)">Basic Plan</option>
+                                            <option value="Professional">Professional</option>
+                                            <option value="Enterprise Plan">Enterprise Plan</option>
+                                        </select>
+                                    </label>
+                                )}
 
                                 <label className="block">
                                     <span className="text-gray-700 font-medium">Message <span className="text-red-500">*</span></span>
@@ -283,7 +325,7 @@ export default function ContactComponent() {
                             <div className="h-64 rounded-xl overflow-hidden shadow-md border border-gray-200 relative">
                                 <iframe
                                     title="Minervasutra Office Location Map"
-                                    src="https://maps.google.com/maps?q=22.5415,88.369444&t=&z=16&ie=UTF8&iwloc=&output=embed"
+                                    src="https://maps.google.com/maps?q=Park%20Circus,%20Kolkata,%20West%20Bengal&t=&z=13&ie=UTF8&iwloc=&output=embed"
                                     className="w-full h-full border-0 absolute inset-0"
                                     allowFullScreen=""
                                     loading="lazy"

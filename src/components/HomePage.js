@@ -278,36 +278,43 @@ const WorkflowFeaturesSection = () => (
     </div>
 );
 
-const CTABannerSection = () => (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-20 mb-0 relative z-10">
-        <div className="p-12 md:p-16 rounded-3xl text-center text-white bg-gradient-to-r from-fuchsia-600 to-cyan-500 shadow-xl">
-            <h2 className="text-4xl font-extrabold mb-4">
-                Ready to Transform Your HR?
-            </h2>
-            <p className="text-xl max-w-3xl mx-auto mb-10">
-                Join thousands of companies that trust Minervasutra to streamline their HR operations. Start your free 14-day trial today.
-            </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
-                <button className="px-8 py-3 border border-transparent text-base font-medium rounded-lg text-fuchsia-600 bg-white hover:bg-gray-50 transition duration-150">
-                    Start Free Trial
-                    <ArrowRight className="w-5 h-5 ml-2 inline-block" />
-                </button>
-                <button className="px-8 py-3 border border-white/50 text-base font-medium rounded-lg text-white bg-transparent hover:bg-white/10 transition duration-150">
-                    View Pricing
-                </button>
+const CTABannerSection = () => {
+    const router = useRouter();
+    
+    return (
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-20 mb-0 relative z-10">
+            <div className="p-12 md:p-16 rounded-3xl text-center text-white bg-gradient-to-r from-fuchsia-600 to-cyan-500 shadow-xl">
+                <h2 className="text-4xl font-extrabold mb-4">
+                    Ready to Transform Your HR?
+                </h2>
+                <p className="text-xl max-w-3xl mx-auto mb-10">
+                    Join thousands of companies that trust Minervasutra to streamline their HR operations. Start your free 14-day trial today.
+                </p>
+                <div className="flex flex-col sm:flex-row justify-center gap-4">
+                    <button
+                        onClick={() => router.push('/contact?type=start_free_trial#contact-form')}
+                        className="px-8 py-3 border border-transparent text-base font-medium rounded-lg text-fuchsia-600 bg-white hover:bg-gray-50 transition duration-150 cursor-pointer">
+                        Start Free Trial
+                        <ArrowRight className="w-5 h-5 ml-2 inline-block" />
+                    </button>
+                    <button
+                        onClick={() => router.push('/pricing?type=pricing#pricing-section')}
+                        className="px-8 py-3 border border-white/50 text-base font-medium rounded-lg text-white bg-transparent hover:bg-white/10 transition duration-150 cursor-pointer">
+                        View Pricing
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
-);
-
+    );
+};
 // --- MAIN COMPONENT ---
 
 export default function HomePageComponent() {
     const router = useRouter();
-    
+
     return (
         <div className="min-h-screen">
-            
+
             {/* Hero Section */}
             <HeroContainer>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-32">
@@ -323,22 +330,23 @@ export default function HomePageComponent() {
                                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-fuchsia-600 to-indigo-600">
                                     Transform
                                 </span>{' '}
-                                Your HR Operations with{' '} 
+                                Your HR Operations with{' '}
                                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-fuchsia-600 to-indigo-600">
                                     AI
                                 </span>
                             </h1>
                             <p className="mt-6 text-xl text-gray-700 max-w-lg">
-                               AI-powered HR platform that handles your entire employee lifecycle from hiring to payroll to performance. Manage everything in one intelligent system built for teams of 10 to 500+.
+                                AI-powered HR platform that handles your entire employee lifecycle from hiring to payroll to performance. Manage everything in one intelligent system built for teams of 10 to 500+.
                             </p>
 
                             <div className="mt-10 flex flex-col sm:flex-row gap-4">
                                 <button
-                                    onClick={() => router.push('/contact?type=demo#contact-form')}
+                                    onClick={() => router.push('/contact?type=start_free_trial#contact-form')}
                                     className="flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-fuchsia-600 hover:bg-fuchsia-700 shadow-lg transition duration-150 ease-in-out">
                                     Start Free Trial →
                                 </button>
                                 <button
+                                    onClick={() => router.push('/contact?type=watch_demo#contact-form')}
                                     className="flex items-center justify-center px-8 py-3 border border-gray-300 text-base font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 hover:shadow-lg transition duration-300 ease-in-out">
                                     <Play className="w-4 h-4 mr-2 text-indigo-600" />
                                     Watch Demo
@@ -362,8 +370,8 @@ export default function HomePageComponent() {
                         {/* Hero Illustration */}
                         {/* <HeroMetricsCard /> */}
                         <Image
-                            src="/home.png" 
-                            alt="Chat Icon" 
+                            src="/home.png"
+                            alt="Chat Icon"
                             width={700}
                             height={700}
                         />

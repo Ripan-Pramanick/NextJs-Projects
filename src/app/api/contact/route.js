@@ -3,9 +3,9 @@ import { NextResponse } from 'next/server';
 
 export async function POST(req) {
   try {
-    // 1. Extract all data received from the frontend
+    // 1. Extract all data received from the frontend (Added planType)
     const body = await req.json();
-    const { fullName, email, company, companySize, inquiryType, message } = body;
+    const { fullName, email, company, companySize, inquiryType, planType, message } = body;
 
     // 2. Setup Nodemailer transporter for Gmail
     const transporter = nodemailer.createTransport({
@@ -29,6 +29,7 @@ export async function POST(req) {
             <h2 style="color: #c026d3; border-bottom: 2px solid #eee; padding-bottom: 10px;">New Contact Form Submission</h2>
             
             <p><strong>Inquiry Type:</strong> ${inquiryType}</p>
+            ${planType ? `<p><strong>Selected Plan:</strong> ${planType}</p>` : ''}
             <p><strong>Full Name:</strong> ${fullName}</p>
             <p><strong>Email:</strong> ${email}</p>
             <p><strong>Company:</strong> ${company ? company : 'N/A'}</p>

@@ -1,7 +1,7 @@
 // src/components/Footer.js
 
 import Image from 'next/image';
-import { Mail, Facebook, Twitter, Linkedin } from 'lucide-react';
+import { Mail, Facebook, Twitter, Linkedin, Instagram} from 'lucide-react';
 
 const FooterLink = ({ href, children }) => (
     <li>
@@ -34,7 +34,7 @@ export default function Footer() {
                                 height={80}
                                 className="mr-2"
                             />
-                            
+
                         </div>
                         {/* End Logo Group */}
 
@@ -87,6 +87,7 @@ export default function Footer() {
                         <a href="#" aria-label="Facebook" className="hover:text-fuchsia-600"><Facebook className="w-5 h-5" /></a>
                         <a href="#" aria-label="Twitter" className="hover:text-fuchsia-600"><Twitter className="w-5 h-5" /></a>
                         <a href="#" aria-label="LinkedIn" className="hover:text-fuchsia-600"><Linkedin className="w-5 h-5" /></a>
+                        <a href="#" aria-label="Instagram" className="hover:text-fuchsia-600"><Instagram className="w-5 h-5" /></a>
                     </div>
                 </div>
             </div>

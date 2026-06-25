@@ -1,8 +1,8 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Check, X, ArrowRight, Minus } from 'lucide-react';
-import { useRouter } from 'next/navigation'; // <-- 1. Imported useRouter for navigation
+import { useRouter } from 'next/navigation';
 
 // --- PRICE CALCULATION ---
 const calculateYearlyPrice = (monthlyPrice) => {
@@ -77,11 +77,6 @@ const comparisonData = [
     { feature: "Dedicated CSM", starter: false, professional: false, enterprise: true },
 ];
 
-const blurStyle = {
-    filter: 'blur(100px)',
-    transform: 'translateZ(0)',
-};
-
 const faqData = [
     {
         question: "Can I switch plans at any time?",
@@ -105,7 +100,7 @@ const faqData = [
 
 // Pricing Card Component
 const PricingCard = ({ plan, billingCycle }) => {
-    const router = useRouter(); // <-- 2. Initialized router inside the card component
+    const router = useRouter();
     const isProfessional = plan.name === "Professional";
 
     const displayPrice = billingCycle === 'monthly' ? plan.monthlyPrice : plan.yearlyPrice;
@@ -118,10 +113,17 @@ const PricingCard = ({ plan, billingCycle }) => {
         buttonClasses += " text-fuchsia-600 bg-white border border-fuchsia-600 hover:bg-fuchsia-50";
     }
 
-    // --- Dynamic URL Parameter Logic ---
-    // If the plan is Enterprise, pass 'pricing', otherwise pass 'demo' for trials
+    // Determine URL parameter based on plan type
     const getQueryType = () => {
-        return plan.name === "Enterprise" ? "pricing" : "demo";
+        return plan.name === "Enterprise" ? "pricing" : "start_free_trial";
+    };
+
+    // --- NEW: Map Pricing plans to Contact form plan options ---
+    const getPlanValue = () => {
+        if (plan.name === "Starter") return "Basic Plan (Free)";
+        if (plan.name === "Professional") return "Professional";
+        if (plan.name === "Enterprise") return "Enterprise Plan";
+        return "";
     };
 
     return (
@@ -143,9 +145,9 @@ const PricingCard = ({ plan, billingCycle }) => {
                 ))}
             </ul>
 
-            {/* 3. Redirecting to /contact page with dynamic query parameter */}
             <button
-                onClick={() => router.push(`/contact?type=${getQueryType()}#contact-form`)}
+                // --- UPDATED: Passing both type and plan in the URL ---
+                onClick={() => router.push(`/contact?type=${getQueryType()}&plan=${encodeURIComponent(getPlanValue())}#contact-form`)}
                 className={buttonClasses}
             >
                 {plan.buttonText}
@@ -157,7 +159,7 @@ const PricingCard = ({ plan, billingCycle }) => {
 
 // FAQ Item Component
 const FAQItem = ({ question, answer }) => {
-    const [isOpen, setIsOpen] = React.useState(false);
+    const [isOpen, setIsOpen] = useState(false);
 
     return (
         <div className="border-b border-gray-100 py-6 cursor-pointer" onClick={() => setIsOpen(!isOpen)}>
@@ -174,11 +176,11 @@ const FAQItem = ({ question, answer }) => {
     );
 };
 
-// --- MAIN PRICING COMPONENT ---
+// --- MAIN PRICING PAGE COMPONENT ---
 
 export default function PricingComponent() {
-    const router = useRouter(); // <-- 4. Initialized router in the main component as well
-    const [billingCycle, setBillingCycle] = React.useState('monthly');
+    const router = useRouter();
+    const [billingCycle, setBillingCycle] = useState('monthly');
 
     const isMonthly = billingCycle === 'monthly';
     const isYearly = billingCycle === 'yearly';
@@ -194,7 +196,7 @@ export default function PricingComponent() {
                     Choose the plan that fits your organization, and get a 7-day free trial.
                 </p>
 
-                {/* Billing Toggle (Monthly/Yearly) */}
+                {/* Billing Toggle */}
                 <div className="mt-8 inline-flex p-1 bg-gray-100 rounded-full text-sm font-medium">
                     <button
                         onClick={() => setBillingCycle('monthly')}
@@ -213,7 +215,7 @@ export default function PricingComponent() {
                 </div>
             </div>
 
-            {/* 1. Pricing Cards Section */}
+            {/* Pricing Cards Section */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
                 <div className="grid grid-cols-1 gap-8 lg:grid-cols-3 lg:gap-10">
                     {pricingPlans.map((plan) => (
@@ -222,7 +224,7 @@ export default function PricingComponent() {
                 </div>
             </div>
 
-            {/* 2. Comparison Table Section */}
+            {/* Comparison Table Section */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20 bg-gray-50">
                 <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
                     Compare Plans
@@ -263,7 +265,7 @@ export default function PricingComponent() {
                 </div>
             </div>
 
-            {/* 3. FAQ Section */}
+            {/* FAQ Section */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
                 <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
                     Frequently Asked Questions
@@ -275,7 +277,7 @@ export default function PricingComponent() {
                 </div>
             </div>
 
-            {/* 4. Final CTA Banner */}
+            {/* Final CTA Banner */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32 relative z-10">
                 <div className="p-12 md:p-16 rounded-3xl text-center text-white bg-gradient-to-r from-fuchsia-600 to-cyan-500 shadow-xl">
                     <h2 className="text-4xl font-extrabold mb-4">
@@ -285,9 +287,8 @@ export default function PricingComponent() {
                         Join thousands of companies that trust Minervasutra to streamline their HR operations. Start your free 14-day trial today.
                     </p>
                     <div className="flex flex-col sm:flex-row justify-center gap-4">
-                        {/* 5. Added ?type=demo navigation to the bottom banner trial button */}
                         <button
-                            onClick={() => router.push('/contact?type=demo#contact-form')}
+                            onClick={() => router.push('/contact?type=start_free_trial#contact-form')}
                             className="px-8 py-3 border border-transparent text-base font-medium rounded-lg text-fuchsia-600 bg-white hover:bg-gray-50 transition duration-150 cursor-pointer"
                         >
                             Start Free Trial
