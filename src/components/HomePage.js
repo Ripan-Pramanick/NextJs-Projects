@@ -2,7 +2,7 @@
 
 import { ArrowRight, Play, CheckCircle, Users, Clock, Shield, BarChart, TrendingUp, Heart, User } from 'lucide-react';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link'; // <-- 1. Imported Link here
 
 // --- REUSABLE COMPONENTS ---
 
@@ -190,97 +190,102 @@ const KeyBenefitsSection = () => (
     </div>
 );
 
-const WorkflowFeaturesSection = () => (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-            <div className="space-y-8">
-                <h2 className="text-5xl font-extrabold leading-tight text-gray-900">
-                    Everything You Need to Manage <br />
-                    <span className="bg-clip-text text-transparent bg-gradient-to-r from-fuchsia-600 to-cyan-500">
-                        Your Workforce
-                    </span>
-                </h2>
+// 2. Removed useRouter from here and used Link
+const WorkflowFeaturesSection = () => {
+    return (
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+                <div className="space-y-8">
+                    <h2 className="text-5xl font-extrabold leading-tight text-gray-900">
+                        Everything You Need to Manage <br />
+                        <span className="bg-clip-text text-transparent bg-gradient-to-r from-fuchsia-600 to-cyan-500">
+                            Your Workforce
+                        </span>
+                    </h2>
 
-                <p className="text-lg text-gray-700 max-w-md">
-                    From hiring to retiring, Minervasutra covers the entire employee lifecycle with powerful, easy-to-use tools.
-                </p>
+                    <p className="text-lg text-gray-700 max-w-md">
+                        From hiring to retiring, Minervasutra covers the entire employee lifecycle with powerful, easy-to-use tools.
+                    </p>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-5 pt-4">
-                    <div className="flex items-start space-x-3">
-                        <CheckCircle className="w-5 h-5 mt-1 text-cyan-500 flex-shrink-0" />
-                        <p className="text-gray-700">Automated onboarding workflows</p>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-5 pt-4">
+                        <div className="flex items-start space-x-3">
+                            <CheckCircle className="w-5 h-5 mt-1 text-cyan-500 flex-shrink-0" />
+                            <p className="text-gray-700">Automated onboarding workflows</p>
+                        </div>
+                        <div className="flex items-start space-x-3">
+                            <CheckCircle className="w-5 h-5 mt-1 text-cyan-500 flex-shrink-0" />
+                            <p className="text-gray-700">Performance tracking & reviews</p>
+                        </div>
+                        <div className="flex items-start space-x-3">
+                            <CheckCircle className="w-5 h-5 mt-1 text-cyan-500 flex-shrink-0" />
+                            <p className="text-gray-700">Time-off management</p>
+                        </div>
+                        <div className="flex items-start space-x-3">
+                            <CheckCircle className="w-5 h-5 mt-1 text-cyan-500 flex-shrink-0" />
+                            <p className="text-gray-700">Payroll integration</p>
+                        </div>
+                        <div className="flex items-start space-x-3">
+                            <CheckCircle className="w-5 h-5 mt-1 text-cyan-500 flex-shrink-0" />
+                            <p className="text-gray-700">Employee self-service portal</p>
+                        </div>
+                        <div className="flex items-start space-x-3">
+                            <CheckCircle className="w-5 h-5 mt-1 text-cyan-500 flex-shrink-0" />
+                            <p className="text-gray-700">Custom reporting dashboards</p>
+                        </div>
                     </div>
-                    <div className="flex items-start space-x-3">
-                        <CheckCircle className="w-5 h-5 mt-1 text-cyan-500 flex-shrink-0" />
-                        <p className="text-gray-700">Performance tracking & reviews</p>
-                    </div>
-                    <div className="flex items-start space-x-3">
-                        <CheckCircle className="w-5 h-5 mt-1 text-cyan-500 flex-shrink-0" />
-                        <p className="text-gray-700">Time-off management</p>
-                    </div>
-                    <div className="flex items-start space-x-3">
-                        <CheckCircle className="w-5 h-5 mt-1 text-cyan-500 flex-shrink-0" />
-                        <p className="text-gray-700">Payroll integration</p>
-                    </div>
-                    <div className="flex items-start space-x-3">
-                        <CheckCircle className="w-5 h-5 mt-1 text-cyan-500 flex-shrink-0" />
-                        <p className="text-gray-700">Employee self-service portal</p>
-                    </div>
-                    <div className="flex items-start space-x-3">
-                        <CheckCircle className="w-5 h-5 mt-1 text-cyan-500 flex-shrink-0" />
-                        <p className="text-gray-700">Custom reporting dashboards</p>
-                    </div>
+
+                    <Link
+                        href="/features"
+                        className="inline-flex items-center text-lg font-semibold text-fuchsia-600 hover:text-fuchsia-700 transition duration-150 pt-4 cursor-pointer"
+                    >
+                        See all features
+                        <ArrowRight className="w-5 h-5 ml-2" />
+                    </Link>
                 </div>
 
-                <a href="#all-features" className="inline-flex items-center text-lg font-semibold text-fuchsia-600 hover:text-fuchsia-700 transition duration-150 pt-4">
-                    See all features
-                    <ArrowRight className="w-5 h-5 ml-2" />
-                </a>
-            </div>
-
-            <div className="grid grid-cols-2 gap-6 pt-4">
-                <div className="flex flex-col space-y-6">
-                    <MetricCard
-                        icon={User}
-                        iconColor="text-cyan-500"
-                        title="Team Overview"
-                        value="156"
-                        label="Active members"
-                    />
-                    <MetricCard
-                        icon={Heart}
-                        iconColor="text-fuchsia-500"
-                        title="Engagement"
-                        value="94%"
-                        label="Satisfaction rate"
-                    />
-                </div>
-                <div className="flex flex-col space-y-6 pt-10">
-                    <MetricCard
-                        icon={TrendingUp}
-                        iconColor="text-green-500"
-                        title="Performance"
-                        value="+23%"
-                        label="This quarter"
-                        valueColor="text-green-600"
-                    />
-                    <MetricCard
-                        icon={Clock}
-                        iconColor="text-orange-500"
-                        title="Time Saved"
-                        value="12h"
-                        label="Per week"
-                        valueColor="text-orange-600"
-                    />
+                <div className="grid grid-cols-2 gap-6 pt-4">
+                    <div className="flex flex-col space-y-6">
+                        <MetricCard
+                            icon={User}
+                            iconColor="text-cyan-500"
+                            title="Team Overview"
+                            value="156"
+                            label="Active members"
+                        />
+                        <MetricCard
+                            icon={Heart}
+                            iconColor="text-fuchsia-500"
+                            title="Engagement"
+                            value="94%"
+                            label="Satisfaction rate"
+                        />
+                    </div>
+                    <div className="flex flex-col space-y-6 pt-10">
+                        <MetricCard
+                            icon={TrendingUp}
+                            iconColor="text-green-500"
+                            title="Performance"
+                            value="+23%"
+                            label="This quarter"
+                            valueColor="text-green-600"
+                        />
+                        <MetricCard
+                            icon={Clock}
+                            iconColor="text-orange-500"
+                            title="Time Saved"
+                            value="12h"
+                            label="Per week"
+                            valueColor="text-orange-600"
+                        />
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-);
+    );
+};
 
+// 3. Removed useRouter from here and used Link
 const CTABannerSection = () => {
-    const router = useRouter();
-    
     return (
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-20 mb-0 relative z-10">
             <div className="p-12 md:p-16 rounded-3xl text-center text-white bg-gradient-to-r from-fuchsia-600 to-cyan-500 shadow-xl">
@@ -291,27 +296,27 @@ const CTABannerSection = () => {
                     Join thousands of companies that trust Minervasutra to streamline their HR operations. Start your free 14-day trial today.
                 </p>
                 <div className="flex flex-col sm:flex-row justify-center gap-4">
-                    <button
-                        onClick={() => router.push('/contact?type=start_free_trial#contact-form')}
-                        className="px-8 py-3 border border-transparent text-base font-medium rounded-lg text-fuchsia-600 bg-white hover:bg-gray-50 transition duration-150 cursor-pointer">
+                    <Link
+                        href="/contact?type=start_free_trial#contact-form"
+                        className="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-lg text-fuchsia-600 bg-white hover:bg-gray-50 transition duration-150 cursor-pointer">
                         Start Free Trial
                         <ArrowRight className="w-5 h-5 ml-2 inline-block" />
-                    </button>
-                    <button
-                        onClick={() => router.push('/pricing?type=pricing#pricing-section')}
-                        className="px-8 py-3 border border-white/50 text-base font-medium rounded-lg text-white bg-transparent hover:bg-white/10 transition duration-150 cursor-pointer">
+                    </Link>
+                    <Link
+                        href="/pricing?type=pricing#pricing-section"
+                        className="inline-flex items-center justify-center px-8 py-3 border border-white/50 text-base font-medium rounded-lg text-white bg-transparent hover:bg-white/10 transition duration-150 cursor-pointer">
                         View Pricing
-                    </button>
+                    </Link>
                 </div>
             </div>
         </div>
     );
 };
+
 // --- MAIN COMPONENT ---
 
+// 4. Removed useRouter from here and used Link for Hero CTAs
 export default function HomePageComponent() {
-    const router = useRouter();
-
     return (
         <div className="min-h-screen">
 
@@ -340,17 +345,17 @@ export default function HomePageComponent() {
                             </p>
 
                             <div className="mt-10 flex flex-col sm:flex-row gap-4">
-                                <button
-                                    onClick={() => router.push('/contact?type=start_free_trial#contact-form')}
-                                    className="flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-fuchsia-600 hover:bg-fuchsia-700 shadow-lg transition duration-150 ease-in-out">
+                                <Link
+                                    href="/contact?type=start_free_trial#contact-form"
+                                    className="flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-fuchsia-600 hover:bg-fuchsia-700 shadow-lg transition duration-150 ease-in-out cursor-pointer">
                                     Start Free Trial →
-                                </button>
-                                <button
-                                    onClick={() => router.push('/contact?type=watch_demo#contact-form')}
-                                    className="flex items-center justify-center px-8 py-3 border border-gray-300 text-base font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 hover:shadow-lg transition duration-300 ease-in-out">
+                                </Link>
+                                <Link
+                                    href="/contact?type=watch_demo#contact-form"
+                                    className="flex items-center justify-center px-8 py-3 border border-gray-300 text-base font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 hover:shadow-lg transition duration-300 ease-in-out cursor-pointer">
                                     <Play className="w-4 h-4 mr-2 text-indigo-600" />
                                     Watch Demo
-                                </button>
+                                </Link>
                             </div>
 
                             {/* Social Proof */}
@@ -368,7 +373,6 @@ export default function HomePageComponent() {
                         </div>
 
                         {/* Hero Illustration */}
-                        {/* <HeroMetricsCard /> */}
                         <Image
                             src="/home.png"
                             alt="Chat Icon"

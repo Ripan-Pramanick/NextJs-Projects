@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Check, X, ArrowRight, Minus } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link'; // <-- 1. Imported Link from next/link
 
 // --- PRICE CALCULATION ---
 const calculateYearlyPrice = (monthlyPrice) => {
@@ -100,28 +100,26 @@ const faqData = [
 
 // Pricing Card Component
 const PricingCard = ({ plan, billingCycle }) => {
-    const router = useRouter();
     const isProfessional = plan.name === "Professional";
 
     const displayPrice = billingCycle === 'monthly' ? plan.monthlyPrice : plan.yearlyPrice;
     const displayInterval = billingCycle === 'monthly' ? 'per user / monthly' : 'per user / year';
 
-    let buttonClasses = "w-full py-3 mt-8 text-base font-semibold rounded-lg transition duration-300 shadow-md cursor-pointer";
+    // 2. We use flex and items-center here because Link is an <a> tag internally
+    let buttonClasses = "w-full py-3 mt-8 flex justify-center items-center text-base font-semibold rounded-lg transition duration-300 shadow-md cursor-pointer";
     if (isProfessional) {
         buttonClasses += " text-white bg-fuchsia-600 hover:bg-fuchsia-700";
     } else {
         buttonClasses += " text-fuchsia-600 bg-white border border-fuchsia-600 hover:bg-fuchsia-50";
     }
 
-    // Determine URL parameter based on plan type
     const getQueryType = () => {
         return plan.name === "Enterprise" ? "pricing" : "start_free_trial";
     };
 
-    // --- NEW: Map Pricing plans to Contact form plan options ---
     const getPlanValue = () => {
         if (plan.name === "Starter") return "Basic Plan (Free)";
-        if (plan.name === "Professional") return "Professional";
+        if (plan.name === "Professional") return "Pro Plan";
         if (plan.name === "Enterprise") return "Enterprise Plan";
         return "";
     };
@@ -145,14 +143,14 @@ const PricingCard = ({ plan, billingCycle }) => {
                 ))}
             </ul>
 
-            <button
-                // --- UPDATED: Passing both type and plan in the URL ---
-                onClick={() => router.push(`/contact?type=${getQueryType()}&plan=${encodeURIComponent(getPlanValue())}#contact-form`)}
+            {/* 3. Replaced Button with Next.js Link component */}
+            <Link 
+                href={`/contact?type=${getQueryType()}&plan=${encodeURIComponent(getPlanValue())}#contact-form`}
                 className={buttonClasses}
             >
                 {plan.buttonText}
                 {plan.buttonText.includes("Trial") && <ArrowRight className="w-4 h-4 ml-2 inline-block" />}
-            </button>
+            </Link>
         </div>
     );
 };
@@ -179,7 +177,6 @@ const FAQItem = ({ question, answer }) => {
 // --- MAIN PRICING PAGE COMPONENT ---
 
 export default function PricingComponent() {
-    const router = useRouter();
     const [billingCycle, setBillingCycle] = useState('monthly');
 
     const isMonthly = billingCycle === 'monthly';
@@ -287,26 +284,24 @@ export default function PricingComponent() {
                         Join thousands of companies that trust Minervasutra to streamline their HR operations. Start your free 14-day trial today.
                     </p>
                     <div className="flex flex-col sm:flex-row justify-center gap-4">
-                        <button
-                            onClick={() => router.push('/contact?type=start_free_trial#contact-form')}
-                            className="px-8 py-3 border border-transparent text-base font-medium rounded-lg text-fuchsia-600 bg-white hover:bg-gray-50 transition duration-150 cursor-pointer"
+                        {/* 4. Replaced bottom CTA buttons with Link */}
+                        <Link
+                            href="/contact?type=start_free_trial#contact-form"
+                            className="px-8 py-3 flex items-center justify-center border border-transparent text-base font-medium rounded-lg text-fuchsia-600 bg-white hover:bg-gray-50 transition duration-150 cursor-pointer"
                         >
                             Start Free Trial
                             <ArrowRight className="w-5 h-5 ml-2 inline-block" />
-                        </button>
-                        <button
-                            onClick={() => router.push('/pricing?type=pricing#pricing-section')}
-                            className="px-8 py-3 border border-white/50 text-base font-medium rounded-lg text-white bg-transparent hover:bg-white/10 transition duration-150 cursor-pointer"
+                        </Link>
+                        <Link
+                            href="/pricing?type=pricing#pricing-section"
+                            className="px-8 py-3 flex items-center justify-center border border-white/50 text-base font-medium rounded-lg text-white bg-transparent hover:bg-white/10 transition duration-150 cursor-pointer"
                         >
-                            Request Demo
-                            <ArrowRight className="w-5 h-5 ml-2 inline-block" />
-                        </button>
+                            View Pricing
+                        </Link>
                     </div>
                 </div>
             </div>
 
-            {/* Background Gradient */}
-            <div className="absolute inset-0 bg-gradient-to-r from-fuchsia-600 to-cyan-500 opacity-10 pointer-events-none"></div>
         </div>
     );
-}       
+}
