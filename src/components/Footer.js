@@ -81,11 +81,11 @@ export default function Footer() {
                 {/* Bottom Section: Copyright and Socials */}
                 <div className="flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
                     <p>
-                        &copy; {new Date().getFullYear()} Minervasutra. All rights reserved. Powered By <a href="#" aria-label="Facebook" className="hover:text-fuchsia-600"></a>Cyberspace Wrorks
+                        &copy; {new Date().getFullYear()} Minervasutra. All rights reserved. Powered By <a href="#" aria-label="Facebook" className="hover:text-fuchsia-600">Cyberspace</a> Wrorks
                     </p>
                     <div className="flex space-x-6 mt-4 md:mt-0">
                         <a href="#" aria-label="Facebook" className="hover:text-fuchsia-600"><Facebook className="w-5 h-5" /></a>
-                        <a href="#" aria-label="Twitter" className="hover:text-fuchsia-600"><Twitter className="w-5 h-5" /></a>
+                        {/* <a href="#" aria-label="Twitter" className="hover:text-fuchsia-600"><Twitter className="w-5 h-5" /></a> */}
                         <a href="#" aria-label="LinkedIn" className="hover:text-fuchsia-600"><Linkedin className="w-5 h-5" /></a>
                         <a href="#" aria-label="Instagram" className="hover:text-fuchsia-600"><Instagram className="w-5 h-5" /></a>
                     </div>

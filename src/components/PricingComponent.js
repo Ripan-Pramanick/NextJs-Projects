@@ -298,12 +298,15 @@ export default function PricingComponent() {
                             onClick={() => router.push('/pricing?type=pricing#pricing-section')}
                             className="px-8 py-3 border border-white/50 text-base font-medium rounded-lg text-white bg-transparent hover:bg-white/10 transition duration-150 cursor-pointer"
                         >
-                            View Pricing
+                            Request Demo
+                            <ArrowRight className="w-5 h-5 ml-2 inline-block" />
                         </button>
                     </div>
                 </div>
             </div>
 
+            {/* Background Gradient */}
+            <div className="absolute inset-0 bg-gradient-to-r from-fuchsia-600 to-cyan-500 opacity-10 pointer-events-none"></div>
         </div>
     );
-}
+}       

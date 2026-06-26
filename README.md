@@ -15,7 +15,7 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [https://minervasutra.vercel.app/](http://localhost:3000) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
 
@@ -38,3 +38,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 =======
 # NextJs-Projects
 >>>>>>> 8fd99b188509a6ede7aeb037088ee4fd27046b80
+
+git add .
+git commit -m "update"
+git push origin main

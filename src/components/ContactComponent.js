@@ -31,10 +31,8 @@ export default function ContactComponent() {
                 // Set Inquiry Type
                 if (typeParam === 'demo') newData.inquiryType = 'Request Demo';
                 else if (typeParam === 'pricing') newData.inquiryType = 'Start Free Trial';
-                else if (typeParam === 'careers') newData.inquiryType = 'Careers';
                 else if (typeParam === 'start_free_trial') newData.inquiryType = 'Start Free Trial';
-                else if (typeParam === 'watch_demo') newData.inquiryType = 'Watch Demo';
-
+               
                 // Set Plan Type if it exists in the URL
                 if (planParam) {
                     newData.planType = planParam;
@@ -234,8 +232,8 @@ export default function ContactComponent() {
                                         <option value="Request Demo">Request Demo</option>
                                         {/* <option value="Start Free Trial">Start Free Trial</option> */}
                                         <option value="Start Free Trial">Start Free Trial</option>
-                                        <option value="Watch Demo">Watch Demo</option>
-                                        <option value="Careers">Careers</option>
+                                        {/* <option value="Watch Demo">Watch Demo</option> */}
+                                        {/* <option value="Careers">Careers</option> */}
                                     </select>
                                 </label>
 

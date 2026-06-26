@@ -269,7 +269,7 @@ export default function AboutUsComponent() {
             </div>
 
             {/* 4. Meet Our Leadership */}
-            <div className="bg-gray-50 py-16 lg:py-20 text-center relative z-10">
+            {/* <div className="bg-gray-50 py-16 lg:py-20 text-center relative z-10">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <h2 className="text-3xl font-bold text-gray-900 mb-12">Meet Our Leadership</h2>
 
@@ -285,7 +285,7 @@ export default function AboutUsComponent() {
                         ))}
                     </div>
                 </div>
-            </div>
+            </div> */}
 
             {/* 5. Final CTA Banner */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32 relative z-10">
@@ -299,10 +299,10 @@ export default function AboutUsComponent() {
                     <div className="flex flex-col sm:flex-row justify-center gap-4">
                         {/* Button 1: Routes to Contact page for Career inquiries */}
                         <button 
-                            onClick={() => router.push('/contact?type=careers#contact-form')}
+                            onClick={() => router.push('/pricing')}
                             className="px-8 py-3 border border-transparent text-base font-medium rounded-lg text-fuchsia-600 bg-white hover:bg-gray-50 transition duration-150 cursor-pointer"
                         >
-                            View Open Careers
+                            View Pricing & Plans
                             <ArrowRight className="w-5 h-5 ml-2 inline-block" />
                         </button>
                         

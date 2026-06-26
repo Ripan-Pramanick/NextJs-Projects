@@ -21,7 +21,7 @@ export async function POST(req) {
     // 3. Create the email structure (with HTML styling)
     const mailOptions = {
       from: process.env.GMAIL_USER,
-      to: 'ripan_pramanick@hotmail.com', // Destination email address
+      to: process.env.CONTACT_EMAIL, // Destination email address
       replyTo: email, // Replies will go directly to the sender
       subject: `Minervasutra Contact: ${inquiryType} from ${fullName}`, // Dynamic subject line including Inquiry Type
       html: `
